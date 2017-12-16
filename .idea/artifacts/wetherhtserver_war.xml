@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="wetherhtserver:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="appserver.war">
+      <element id="artifact" artifact-name="wetherhtserver:war exploded" />
+    </root>
+  </artifact>
+</component>
