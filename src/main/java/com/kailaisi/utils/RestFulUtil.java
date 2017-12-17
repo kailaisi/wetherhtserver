@@ -3,10 +3,6 @@ package com.kailaisi.utils;
 import com.kailaisi.bean.RestFulBean;
 
 public class RestFulUtil<T> {
-    public RestFulUtil() {
-        throw new IllegalArgumentException("u cannot init me....");
-    }
-
     public static RestFulUtil getInstance() {
         return new RestFulUtil();
     }
