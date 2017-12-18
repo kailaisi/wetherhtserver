@@ -19,6 +19,7 @@ public class GlableExceptionHandler {
             ApiException ae = (ApiException) e;
             return RestFulUtil.getInstance().getResuFulBean(ae.getData(), ae.getCode(), ae.getErrMsg());
         } else {
+            e.printStackTrace();
             return RestFulUtil.getInstance().getResuFulBean(null, CodeEnums.SYSTEM_ERR.getCode(), CodeEnums.SYSTEM_ERR.getMsg());
         }
     }

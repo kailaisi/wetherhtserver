@@ -226,7 +226,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
     <select id="selectByNameAndPwd" resultMap="BaseResultMap">
-        select top 1
+        select
         <include refid="Base_Column_List"/>
         from user
         where username = #{0} and password = #{1}
