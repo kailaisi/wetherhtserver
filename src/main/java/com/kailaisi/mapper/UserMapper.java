@@ -2,8 +2,9 @@ package com.kailaisi.mapper;
 
 import com.kailaisi.pojo.User;
 import com.kailaisi.pojo.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     int countByExample(UserExample example);
@@ -27,4 +28,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectByNameAndPwd(String username, String pwd);
+
+    List<User> findByName(String username);
 }

@@ -1,7 +1,5 @@
 package com.kailaisi.service;
 
-import com.kailaisi.bean.RestFulBean;
-import com.kailaisi.bean.UserBean;
 import com.kailaisi.pojo.User;
 
 import java.util.List;

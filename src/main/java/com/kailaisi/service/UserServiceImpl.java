@@ -2,6 +2,8 @@ package com.kailaisi.service;
 
 import com.kailaisi.mapper.UserMapper;
 import com.kailaisi.pojo.User;
+import com.kailaisi.utils.ApiException;
+import com.kailaisi.utils.CodeEnums;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public User registor(User bean) {
         // TODO: 2017/12/18 需要判断user是否存在，如果存在，则返回失败信息，如果不存在，则注册，并返回注册后生成的注册信息
-        Integer id = userMapper.insertSelective(bean);
-        User user = userMapper.selectByPrimaryKey(id);
-        return user;
+        List<User> users = userMapper.findByName(bean.getUsername());
+        if (users.isEmpty()) {
+            Integer id = userMapper.insertSelective(bean);
+            User user1 = userMapper.selectByPrimaryKey(id);
+            return user1;
+        } else {
+            throw new ApiException(CodeEnums.USER_EXIST);
+        }
     }
 
     @Override
     public User login(String phone, String pwd) {
-        return null;
+        List<User> users = userMapper.selectByNameAndPwd(phone, pwd);
+        if (users.isEmpty()) {
+            throw new ApiException(CodeEnums.USER_NOT_EXIST);
+        } else {
+            return users.get(0);
+        }
     }
 }
