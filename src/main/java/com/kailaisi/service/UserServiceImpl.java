@@ -1,9 +1,12 @@
 package com.kailaisi.service;
 
+import com.kailaisi.mapper.TokenMapper;
 import com.kailaisi.mapper.UserMapper;
+import com.kailaisi.pojo.TokenKey;
 import com.kailaisi.pojo.User;
 import com.kailaisi.utils.ApiException;
 import com.kailaisi.utils.CodeEnums;
+import com.kailaisi.utils.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private TokenMapper tokenMapper;
 
     public List<User> findUsers() throws Exception {
         List<User> list = userMapper.selectByExample(null);
@@ -20,8 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User registor(User bean) {
-        // TODO: 2017/12/18 需要判断user是否存在，如果存在，则返回失败信息，如果不存在，则注册，并返回注册后生成的注册信息
+    public User register(User bean) {
         List<User> users = userMapper.findByName(bean.getUsername());
         if (users.isEmpty()) {
             Integer id = userMapper.insertSelective(bean);
@@ -33,12 +37,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String phone, String pwd) {
+    public String login(String phone, String pwd) {
         List<User> users = userMapper.selectByNameAndPwd(phone, pwd);
         if (users.isEmpty()) {
             throw new ApiException(CodeEnums.USER_NOT_EXIST);
         } else {
-            return users.get(0);
+            saveOrUpdateToken(users.get(0));
+            return "登录成功";
         }
+    }
+
+    private void saveOrUpdateToken(User user) {
+        String token = null;
+        try {
+            token = MD5.encryptMD5(String.valueOf(System.currentTimeMillis() + "appservice.02154778ke783dad34"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        TokenKey tokenBean = tokenMapper.isTokenAvailable(user.getUsername());
+        if(tokenBean!=null){
+            tokenBean.setToken(token);
+        }else {
+            tokenBean=new TokenKey();
+            tokenBean.setToken(token);
+            tokenBean.setUsername(user.getUsername());
+        }
+        tokenMapper.updateOrAdd(tokenBean);
     }
 }

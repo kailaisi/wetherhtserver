@@ -18,12 +18,12 @@ public class UserAction extends GlableExceptionHandler {
     @ResponseBody
     @RequestMapping(value = "/register.do", method = RequestMethod.POST, produces = {"application/json; charset=utf-8"})
     public User register(@RequestBody User user) {
-        return userService.registor(user);
+        return userService.register(user);
     }
 
     @ResponseBody
     @RequestMapping(value = "/loginByPwd.do", method = RequestMethod.GET, produces = {"application/json; charset=utf-8"})
-    public User loginByPWD(@RequestParam String username, @RequestParam String pwd) {
+    public String loginByPWD(@RequestParam String username, @RequestParam String pwd) {
         return userService.login(username, pwd);
     }
 

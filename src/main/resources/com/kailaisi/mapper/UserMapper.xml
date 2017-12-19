@@ -102,7 +102,7 @@
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.kailaisi.pojo.User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.kailaisi.pojo.User" >
     insert into user (username, password,
       age, sex, address)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},

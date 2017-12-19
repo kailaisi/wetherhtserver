@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserService {
     List<User> findUsers() throws Exception;
 
-    User registor(User bean);
+    User register(User bean);
 
-    User login(String phone, String pwd);
+    String login(String phone, String pwd);
 }
