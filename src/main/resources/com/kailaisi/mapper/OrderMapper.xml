@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kailaisi.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.kailaisi.pojo.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="orderNo" property="orderno" jdbcType="VARCHAR" />
+    <result column="payMoney" property="paymoney" jdbcType="DECIMAL" />
+    <result column="payGoods" property="paygoods" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="payTime" property="paytime" jdbcType="TIMESTAMP" />
+    <result column="payWay" property="payway" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, phone, orderNo, payMoney, payGoods, status, payTime, payWay
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.kailaisi.pojo.Order" >
+    insert into t_order (id, userid, phone, 
+      orderNo, payMoney, payGoods, 
+      status, payTime, payWay
+      )
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{orderno,jdbcType=VARCHAR}, #{paymoney,jdbcType=DECIMAL}, #{paygoods,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, #{payway,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kailaisi.pojo.Order" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="orderno != null" >
+        orderNo,
+      </if>
+      <if test="paymoney != null" >
+        payMoney,
+      </if>
+      <if test="paygoods != null" >
+        payGoods,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="paytime != null" >
+        payTime,
+      </if>
+      <if test="payway != null" >
+        payWay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney != null" >
+        #{paymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="paygoods != null" >
+        #{paygoods,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null" >
+        #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payway != null" >
+        #{payway,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kailaisi.pojo.Order" >
+    update t_order
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderno != null" >
+        orderNo = #{orderno,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney != null" >
+        payMoney = #{paymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="paygoods != null" >
+        payGoods = #{paygoods,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="paytime != null" >
+        payTime = #{paytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payway != null" >
+        payWay = #{payway,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kailaisi.pojo.Order" >
+    update t_order
+    set userid = #{userid,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      orderNo = #{orderno,jdbcType=VARCHAR},
+      payMoney = #{paymoney,jdbcType=DECIMAL},
+      payGoods = #{paygoods,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      payTime = #{paytime,jdbcType=TIMESTAMP},
+      payWay = #{payway,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

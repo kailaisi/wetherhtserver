@@ -9,5 +9,5 @@ public interface UserService {
 
     User register(User bean);
 
-    String login(String phone, String pwd);
+    User login(String username, String pwd);
 }

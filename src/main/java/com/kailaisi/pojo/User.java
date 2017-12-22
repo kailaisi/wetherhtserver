@@ -1,7 +1,10 @@
 package com.kailaisi.pojo;
 
-public class User  {
+public class User {
+
     private Integer id;
+
+    private String phone;
 
     private String username;
 
@@ -9,9 +12,11 @@ public class User  {
 
     private Integer age;
 
-    private String sex;
+    private Integer sex;
 
     private String address;
+
+    private String token;
 
     public Integer getId() {
         return id;
@@ -19,6 +24,14 @@ public class User  {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getUsername() {
@@ -45,12 +58,12 @@ public class User  {
         this.age = age;
     }
 
-    public String getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex == null ? null : sex.trim();
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
     public String getAddress() {
@@ -61,14 +74,23 @@ public class User  {
         this.address = address == null ? null : address.trim();
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", phone='" + phone + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", age=" + age +
-                ", sex='" + sex + '\'' +
+                ", sex=" + sex +
                 ", address='" + address + '\'' +
                 '}';
     }

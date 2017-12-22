@@ -22,8 +22,8 @@ public class UserAction extends GlableExceptionHandler {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/loginByPwd.do", method = RequestMethod.GET, produces = {"application/json; charset=utf-8"})
-    public String loginByPWD(@RequestParam String username, @RequestParam String pwd) {
+    @RequestMapping(value = "/login.do", method = RequestMethod.GET, produces = {"application/json; charset=utf-8"})
+    public User loginByPWD(@RequestParam String username, @RequestParam String pwd) {
         return userService.login(username, pwd);
     }
 

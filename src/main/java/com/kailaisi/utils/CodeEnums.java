@@ -13,24 +13,30 @@ public enum CodeEnums {
     USER_TOKEN_EMPTY(10007, "获取鉴权信息失败"),
     USER_ROLE_LIMIT(10008, "权限不足"),
     EMAIL_USED(10009, "邮箱已经被使用"),
+    NAME_NOT_ALLOWED(10003, "用户名必须为手机号"),
     //
-    ARTICLE_NOT_EXIST(20001, "文章不存在"),
-    ;
+    ARTICLE_NOT_EXIST(20001, "文章不存在"),;
+
     CodeEnums(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
+
     private Integer code;
     private String msg;
+
     public Integer getCode() {
         return code;
     }
+
     public void setCode(Integer code) {
         this.code = code;
     }
+
     public String getMsg() {
         return msg;
     }
+
     public void setMsg(String msg) {
         this.msg = msg;
     }

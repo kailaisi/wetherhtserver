@@ -5,8 +5,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kailaisi.bean.RestFulBean;
 import com.kailaisi.bean.TokenBean;
 import com.kailaisi.mapper.TokenMapper;
-import com.kailaisi.pojo.TokenExample;
-import com.kailaisi.pojo.TokenKey;
+import com.kailaisi.pojo.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,6 +24,7 @@ import java.util.Map;
 public class RestFulInterceptor implements HandlerInterceptor {
     @Autowired
     TokenMapper tokenMapper;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         System.out.println("preHandle");
@@ -37,20 +36,18 @@ public class RestFulInterceptor implements HandlerInterceptor {
             String value = request.getHeader(key);
             headMaps.put(key, value);
         }
-        if (uri.endsWith("user/loginByPwd.do")
+        if (uri.endsWith("user/login.do")
                 || uri.endsWith("user/register.do")
                 || uri.endsWith("pay/verifyalipayresult.do")) {
             return true;
         } else {
-            if(headMaps.get("username")==null||headMaps.get("token")==null){
+            if (headMaps.get("username") == null || headMaps.get("token") == null) {
                 return verifyError(response);
             }
-            TokenExample example = new TokenExample();
-            example.createCriteria().andUsernameEqualTo(headMaps.get("username"));
-            List<TokenKey> tokenKeys = tokenMapper.selectByExample(example);
-            if(tokenKeys!=null && !tokenKeys.isEmpty()&& tokenKeys.get(0).getToken().endsWith(headMaps.get("token"))){
+            Token tokenKeys = tokenMapper.isTokenAvailable(headMaps.get("username"));
+            if (tokenKeys != null && tokenKeys.getToken().endsWith(headMaps.get("token"))) {
                 return true;
-            }else {
+            } else {
                 return verifyError(response);
             }
         }
