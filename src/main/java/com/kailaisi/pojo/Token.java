@@ -1,6 +1,8 @@
 package com.kailaisi.pojo;
 
-public class Token {
+import com.kailaisi.bean.BaseBean;
+
+public class Token extends BaseBean{
     private Integer id;
 
     private String username;

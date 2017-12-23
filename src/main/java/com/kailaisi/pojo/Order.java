@@ -1,8 +1,10 @@
 package com.kailaisi.pojo;
 
+import com.kailaisi.bean.BaseBean;
+
 import java.util.Date;
 
-public class Order {
+public class Order  extends BaseBean{
     private Integer id;
 
     private Integer userid;
@@ -19,7 +21,7 @@ public class Order {
 
     private Date paytime;
 
-    private String payway;
+    private Integer payway;
 
     public Integer getId() {
         return id;
@@ -85,11 +87,11 @@ public class Order {
         this.paytime = paytime;
     }
 
-    public String getPayway() {
+    public Integer getPayway() {
         return payway;
     }
 
-    public void setPayway(String payway) {
-        this.payway = payway == null ? null : payway.trim();
+    public void setPayway(Integer payway) {
+        this.payway = payway;
     }
 }

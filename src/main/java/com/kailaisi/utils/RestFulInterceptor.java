@@ -3,7 +3,6 @@ package com.kailaisi.utils;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.kailaisi.bean.RestFulBean;
-import com.kailaisi.bean.TokenBean;
 import com.kailaisi.mapper.TokenMapper;
 import com.kailaisi.pojo.Token;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,7 @@ public class RestFulInterceptor implements HandlerInterceptor {
      * 认证失败
      */
     private boolean verifyError(HttpServletResponse response) throws IOException {
-        RestFulBean<TokenBean> resuFulBean = RestFulUtil.getInstance().getResuFulBean(null, 1, "用户身份验证失败");
+        RestFulBean<Token> resuFulBean = RestFulUtil.getInstance().getResuFulBean(null, 1, "用户身份验证失败");
         response.setCharacterEncoding("UTF-8");
         Writer writer = response.getWriter();
         writer.write(JSONObject.toJSONString(resuFulBean, SerializerFeature.WriteMapNullValue));

@@ -10,7 +10,7 @@
     <result column="payGoods" property="paygoods" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="payTime" property="paytime" jdbcType="TIMESTAMP" />
-    <result column="payWay" property="payway" jdbcType="VARCHAR" />
+    <result column="payWay" property="payway" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, userid, phone, orderNo, payMoney, payGoods, status, payTime, payWay
@@ -28,7 +28,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
       #{orderno,jdbcType=VARCHAR}, #{paymoney,jdbcType=DECIMAL}, #{paygoods,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, #{payway,jdbcType=VARCHAR}
+      #{status,jdbcType=INTEGER}, #{paytime,jdbcType=TIMESTAMP}, #{payway,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.kailaisi.pojo.Order" >
@@ -88,7 +88,7 @@
         #{paytime,jdbcType=TIMESTAMP},
       </if>
       <if test="payway != null" >
-        #{payway,jdbcType=VARCHAR},
+        #{payway,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -117,7 +117,7 @@
         payTime = #{paytime,jdbcType=TIMESTAMP},
       </if>
       <if test="payway != null" >
-        payWay = #{payway,jdbcType=VARCHAR},
+        payWay = #{payway,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -131,7 +131,14 @@
       payGoods = #{paygoods,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       payTime = #{paytime,jdbcType=TIMESTAMP},
-      payWay = #{payway,jdbcType=VARCHAR}
+      payWay = #{payway,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByOrerNo">
+    select
+    <include refid="Base_Column_List"/>
+    FROM  t_order
+    WHERE  orderNo=#{out_trade_no}
+  </select>
 </mapper>

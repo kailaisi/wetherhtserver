@@ -1,6 +1,8 @@
 package com.kailaisi.pojo;
 
-public class User {
+import com.kailaisi.bean.BaseBean;
+
+public class User extends BaseBean{
 
     private Integer id;
 

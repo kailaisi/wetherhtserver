@@ -13,7 +13,8 @@ public enum CodeEnums {
     USER_TOKEN_EMPTY(10007, "获取鉴权信息失败"),
     USER_ROLE_LIMIT(10008, "权限不足"),
     EMAIL_USED(10009, "邮箱已经被使用"),
-    NAME_NOT_ALLOWED(10003, "用户名必须为手机号"),
+    NAME_NOT_ALLOWED(10010, "用户名必须为手机号"),
+    ORDER_CREAT_FAILED(10011,"订单生成失败"),
     //
     ARTICLE_NOT_EXIST(20001, "文章不存在"),;
 
