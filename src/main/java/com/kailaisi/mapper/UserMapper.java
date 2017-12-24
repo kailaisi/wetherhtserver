@@ -10,10 +10,9 @@ public interface UserMapper {
 
     User findByNameAndPwd(@Param("username") String username, @Param("pwd") String pwd);
 
-
-    User getUserByPhone(@Param("phone") String phone);
-
     List<User> findAll();
 
     Integer register(User bean);
+
+    User getUserByPhoneAndName(@Param("phone") String phone, @Param("username") String username);
 }

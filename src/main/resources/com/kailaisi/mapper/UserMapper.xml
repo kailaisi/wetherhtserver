@@ -27,13 +27,12 @@
     WHERE username=#{username} AND password=#{pwd}
   </select>
 
-  <select id="getUserByPhone" resultType="com.kailaisi.pojo.User">
+  <select id="getUserByPhoneAndName" resultType="com.kailaisi.pojo.User">
     SELECT
     <include refid="Base_Column_List"/>
     FROM t_user
-    WHERE phone=#{phone}
+    WHERE phone=#{phone} or username=#{username}
   </select>
-
 
   <select id="findAll" resultMap="BaseResultMap">
     SELECT

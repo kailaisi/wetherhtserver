@@ -30,13 +30,14 @@ public class UserServiceImpl implements UserService {
         if (!PhoneFormatCheckUtils.isChinaPhoneLegal(bean.getPhone())) {
             throw new ApiException(CodeEnums.NAME_NOT_ALLOWED);
         }
-        User users = userMapper.getUserByPhone(bean.getPhone());
+        User users = userMapper.getUserByPhoneAndName(bean.getPhone(),bean.getUsername());
         if (users == null) {
-            Integer id = userMapper.register(bean);
-            User user1 = userMapper.selectByPrimaryKey(id);
-            saveOrUpdateToken(user1);
-            return user1;
+            //mapper会把生成的主键直接赋值给bean类。
+            userMapper.register(bean);
+            saveOrUpdateToken(bean);
+            return bean;
         } else {
+            System.out.println(bean.getPhone() + "用户已经存在");
             throw new ApiException(CodeEnums.USER_EXIST);
         }
     }
@@ -62,11 +63,9 @@ public class UserServiceImpl implements UserService {
         user.setToken(token);
         Token tokenBean = tokenMapper.isTokenAvailable(user.getUsername());
         if (tokenBean != null) {
-            int i = tokenMapper.updateToken(tokenBean.getId(), token);
-            Token token1 = tokenMapper.selectByPrimaryKey(tokenBean.getId());
-            System.out.println(i);
+            tokenMapper.updateToken(tokenBean.getId(), token);
         } else {
-            tokenMapper.insert(user.getUsername(),token);
+            tokenMapper.insert(user.getUsername(), token);
         }
     }
 }
