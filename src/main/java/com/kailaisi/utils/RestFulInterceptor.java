@@ -26,7 +26,6 @@ public class RestFulInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        System.out.println("preHandle");
         String uri = request.getRequestURI();
         Map<String, String> headMaps = new HashMap<String, String>();
         Enumeration<String> headerNames = request.getHeaderNames();
