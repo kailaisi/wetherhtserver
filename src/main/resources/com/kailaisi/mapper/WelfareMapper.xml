@@ -86,4 +86,11 @@
     FROM  t_welfare
     where name=#{name}
   </select>
+
+  <select id="findByPager" resultMap="BaseResultMap">
+    SELECT
+    a.id,name,description, createtime
+    from t_welfare a,(select c.id FROM t_welfare c limit #{start},#{size}) b
+    where a.id=b.id
+  </select>
 </mapper>
