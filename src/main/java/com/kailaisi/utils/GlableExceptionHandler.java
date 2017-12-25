@@ -13,7 +13,6 @@ public class GlableExceptionHandler {
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public RestFulBean defaultException(Exception e) throws Exception {
-        RestFulBean<Object> bean = new RestFulBean<Object>();
         if (e instanceof ApiException) {
             ApiException ae = (ApiException) e;
             return RestFulUtil.getInstance().getResuFulBean(ae.getData(), ae.getCode(), ae.getErrMsg());

@@ -56,8 +56,11 @@
                enableDeleteByPrimaryKey="false" enableInsert="false" enableUpdateByPrimaryKey="false"/>
         <table tableName="t_token" domainObjectName="Token" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
-               enableDeleteByPrimaryKey="false" enableInsert="false" enableUpdateByPrimaryKey="false"/>-->
+               enableDeleteByPrimaryKey="false" enableInsert="false" enableUpdateByPrimaryKey="false"/>
         <table tableName="t_update" domainObjectName="Update" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
+               enableDeleteByPrimaryKey="true" enableInsert="true" enableUpdateByPrimaryKey="true"/>-->
+        <table tableName="t_welfare" domainObjectName="Welfare" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"
                enableDeleteByPrimaryKey="true" enableInsert="true" enableUpdateByPrimaryKey="true"/>
         <!-- 有些表的字段需要指定java类型

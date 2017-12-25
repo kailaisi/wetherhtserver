@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kailaisi.mapper.UpdateMapper">
+    <resultMap id="BaseResultMap" type="com.kailaisi.pojo.Update">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="md5value" property="md5value" jdbcType="VARCHAR"/>
+        <result column="versioncode" property="versioncode" jdbcType="INTEGER"/>
+        <result column="versionName" property="versionname" jdbcType="VARCHAR"/>
+        <result column="newversioncode" property="newversioncode" jdbcType="INTEGER"/>
+        <result column="newversionName" property="newversionname" jdbcType="VARCHAR"/>
+        <result column="filesize" property="filesize" jdbcType="DECIMAL"/>
+        <result column="downloadpath" property="downloadpath" jdbcType="VARCHAR"/>
+        <result column="patchdownloadpath" property="patchdownloadpath" jdbcType="VARCHAR"/>
+        <result column="channelid" property="channelid" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, md5value, versioncode, versionName, newversioncode, newversionName, filesize, 
+    downloadpath, patchdownloadpath, channelid
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_update
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_update
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.kailaisi.pojo.Update">
+    insert into t_update (id, md5value, versioncode, 
+      versionName, newversioncode, newversionName, 
+      filesize, downloadpath, patchdownloadpath, 
+      channelid)
+    values (#{id,jdbcType=INTEGER}, #{md5value,jdbcType=VARCHAR}, #{versioncode,jdbcType=INTEGER}, 
+      #{versionname,jdbcType=VARCHAR}, #{newversioncode,jdbcType=INTEGER}, #{newversionname,jdbcType=VARCHAR}, 
+      #{filesize,jdbcType=DECIMAL}, #{downloadpath,jdbcType=VARCHAR}, #{patchdownloadpath,jdbcType=VARCHAR}, 
+      #{channelid,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.kailaisi.pojo.Update">
+        insert into t_update
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="md5value != null">
+                md5value,
+            </if>
+            <if test="versioncode != null">
+                versioncode,
+            </if>
+            <if test="versionname != null">
+                versionName,
+            </if>
+            <if test="newversioncode != null">
+                newversioncode,
+            </if>
+            <if test="newversionname != null">
+                newversionName,
+            </if>
+            <if test="filesize != null">
+                filesize,
+            </if>
+            <if test="downloadpath != null">
+                downloadpath,
+            </if>
+            <if test="patchdownloadpath != null">
+                patchdownloadpath,
+            </if>
+            <if test="channelid != null">
+                channelid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="md5value != null">
+                #{md5value,jdbcType=VARCHAR},
+            </if>
+            <if test="versioncode != null">
+                #{versioncode,jdbcType=INTEGER},
+            </if>
+            <if test="versionname != null">
+                #{versionname,jdbcType=VARCHAR},
+            </if>
+            <if test="newversioncode != null">
+                #{newversioncode,jdbcType=INTEGER},
+            </if>
+            <if test="newversionname != null">
+                #{newversionname,jdbcType=VARCHAR},
+            </if>
+            <if test="filesize != null">
+                #{filesize,jdbcType=DECIMAL},
+            </if>
+            <if test="downloadpath != null">
+                #{downloadpath,jdbcType=VARCHAR},
+            </if>
+            <if test="patchdownloadpath != null">
+                #{patchdownloadpath,jdbcType=VARCHAR},
+            </if>
+            <if test="channelid != null">
+                #{channelid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kailaisi.pojo.Update">
+        update t_update
+        <set>
+            <if test="md5value != null">
+                md5value = #{md5value,jdbcType=VARCHAR},
+            </if>
+            <if test="versioncode != null">
+                versioncode = #{versioncode,jdbcType=INTEGER},
+            </if>
+            <if test="versionname != null">
+                versionName = #{versionname,jdbcType=VARCHAR},
+            </if>
+            <if test="newversioncode != null">
+                newversioncode = #{newversioncode,jdbcType=INTEGER},
+            </if>
+            <if test="newversionname != null">
+                newversionName = #{newversionname,jdbcType=VARCHAR},
+            </if>
+            <if test="filesize != null">
+                filesize = #{filesize,jdbcType=DECIMAL},
+            </if>
+            <if test="downloadpath != null">
+                downloadpath = #{downloadpath,jdbcType=VARCHAR},
+            </if>
+            <if test="patchdownloadpath != null">
+                patchdownloadpath = #{patchdownloadpath,jdbcType=VARCHAR},
+            </if>
+            <if test="channelid != null">
+                channelid = #{channelid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kailaisi.pojo.Update">
+    update t_update
+    set md5value = #{md5value,jdbcType=VARCHAR},
+      versioncode = #{versioncode,jdbcType=INTEGER},
+      versionName = #{versionname,jdbcType=VARCHAR},
+      newversioncode = #{newversioncode,jdbcType=INTEGER},
+      newversionName = #{newversionname,jdbcType=VARCHAR},
+      filesize = #{filesize,jdbcType=DECIMAL},
+      downloadpath = #{downloadpath,jdbcType=VARCHAR},
+      patchdownloadpath = #{patchdownloadpath,jdbcType=VARCHAR},
+      channelid = #{channelid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getUpdateInfo" resultType="com.kailaisi.pojo.Update">
+        select
+        <include refid="Base_Column_List"/>
+        from t_update
+        where md5value = #{md5value,jdbcType=VARCHAR} and versioncode=#{versioncode} and channelid=#{channelid}
+    </select>
+</mapper>
