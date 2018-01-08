@@ -4,5 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-
+    <settings>
+        <setting name="cacheEnabled" value="true" />
+        <setting name="logImpl" value="LOG4J"/>
+        <!-- 查询时，关闭关联对象即时加载以提高性能 -->
+        <setting name="lazyLoadingEnabled" value="false"/>
+    </settings>
 </configuration>

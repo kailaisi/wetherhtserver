@@ -46,6 +46,9 @@ public class UserServiceImplTest {
     public void testLogin() throws Exception {
         User user = userService.login("kailaisi", "wu03102896528");
         logger.info(JSON.toJSONString(user));
+        user = userService.login("kailaisi", "wu03102896528");
+        user = userService.login("kailaisi", "wu03102896528");
+        user = userService.login("kailaisi", "wu03102896528");
     }
 
 }

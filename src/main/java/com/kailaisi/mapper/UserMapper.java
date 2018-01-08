@@ -14,5 +14,5 @@ public interface UserMapper {
 
     Integer register(User bean);
 
-    User getUserByPhoneAndName(@Param("phone") String phone, @Param("username") String username);
+    List<User> getUserByPhoneAndName(@Param("phone") String phone, @Param("username") String username);
 }

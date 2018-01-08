@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
         if (!PhoneFormatCheckUtils.isChinaPhoneLegal(bean.getPhone())) {
             throw new ApiException(CodeEnums.NAME_NOT_ALLOWED);
         }
-        User users = userMapper.getUserByPhoneAndName(bean.getPhone(),bean.getUsername());
-        if (users == null) {
+        List<User> users = userMapper.getUserByPhoneAndName(bean.getPhone(),bean.getUsername());
+        if (users == null||users.size()==0) {
             //mapper会把生成的主键直接赋值给bean类。
             userMapper.register(bean);
             saveOrUpdateToken(bean);

@@ -34,9 +34,7 @@ public class RestFulInterceptor implements HandlerInterceptor {
             String value = request.getHeader(key);
             headMaps.put(key, value);
         }
-        if (uri.endsWith("user/login.do")
-                || uri.endsWith("register.do")
-                || uri.endsWith("pay/verifyalipayresult.do")) {
+        if (uri.endsWith(".do")) {
             return true;
         } else {
             if (headMaps.get("username") == null || headMaps.get("token") == null) {

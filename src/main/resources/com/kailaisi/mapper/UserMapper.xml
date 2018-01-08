@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kailaisi.mapper.UserMapper" >
+  <cache type="org.mybatis.caches.redis.RedisCache" />
   <resultMap id="BaseResultMap" type="com.kailaisi.pojo.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="phone" property="phone" jdbcType="CHAR" />
@@ -27,7 +28,7 @@
     WHERE username=#{username} AND password=#{pwd}
   </select>
 
-  <select id="getUserByPhoneAndName" resultType="com.kailaisi.pojo.User">
+  <select id="getUserByPhoneAndName" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM t_user
