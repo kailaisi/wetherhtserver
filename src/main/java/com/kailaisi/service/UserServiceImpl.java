@@ -9,8 +9,11 @@ import com.kailaisi.utils.CodeEnums;
 import com.kailaisi.utils.MD5;
 import com.kailaisi.utils.PhoneFormatCheckUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service(value = "userService")
@@ -30,8 +33,8 @@ public class UserServiceImpl implements UserService {
         if (!PhoneFormatCheckUtils.isChinaPhoneLegal(bean.getPhone())) {
             throw new ApiException(CodeEnums.NAME_NOT_ALLOWED);
         }
-        List<User> users = userMapper.getUserByPhoneAndName(bean.getPhone(),bean.getUsername());
-        if (users == null||users.size()==0) {
+        List<User> users = userMapper.getUserByPhoneAndName(bean.getPhone(), bean.getUsername());
+        if (users == null || users.size() == 0) {
             //mapper会把生成的主键直接赋值给bean类。
             userMapper.register(bean);
             saveOrUpdateToken(bean);
@@ -53,6 +56,37 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public String uploadHead(MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new ApiException(1, "文件不能为空");
+        }
+        String fileName = file.getOriginalFilename();
+        if(!fileName.toLowerCase().endsWith(".png")&& !fileName.toLowerCase().endsWith("jpg")){
+            throw new ApiException(1, "只支持png和jpg格式文件");
+        }
+        long size = file.getSize();
+        if(size>1024*1024){
+            throw new ApiException(1, "头像大小不能超过1M");
+        }
+        else {
+            try {
+                File base = new File("D:\\server\\header");
+                String filepath = new File(base, fileName).getAbsolutePath();
+                file.transferTo(new File(filepath));
+                return "/header/"+fileName;
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new ApiException(1, "文件上传失败");
+            }
+        }
+    }
+
+    /**
+     * 更新token值
+     *
+     * @param user
+     */
     private void saveOrUpdateToken(User user) {
         String token = null;
         try {
@@ -68,4 +102,5 @@ public class UserServiceImpl implements UserService {
             tokenMapper.insert(user.getUsername(), token);
         }
     }
+
 }

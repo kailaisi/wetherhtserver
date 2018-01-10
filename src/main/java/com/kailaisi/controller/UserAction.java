@@ -6,6 +6,7 @@ import com.kailaisi.utils.GlableExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,5 +32,11 @@ public class UserAction extends GlableExceptionHandler {
     @RequestMapping(value = "/findAll.do", method = RequestMethod.GET, produces = {"application/json; charset=utf-8"})
     public List<User> findAll() throws Exception {
         return userService.findUsers();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/upload.do",method = RequestMethod.POST)
+    public String uploadHeadImg(@RequestParam("file") MultipartFile file) {
+        return userService.uploadHead(file);
     }
 }
