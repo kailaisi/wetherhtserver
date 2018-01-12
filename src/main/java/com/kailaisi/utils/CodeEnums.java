@@ -15,7 +15,6 @@ public enum CodeEnums {
     EMAIL_USED(10009, "邮箱已经被使用"),
     NAME_NOT_ALLOWED(10010, "用户名必须为手机号"),
     ORDER_CREAT_FAILED(10011,"订单生成失败"),
-    //
     ARTICLE_NOT_EXIST(20001, "文章不存在"),;
 
     CodeEnums(Integer code, String msg) {
