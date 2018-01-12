@@ -57,24 +57,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String uploadHead(MultipartFile file) {
+    public String uploadHead(String username, MultipartFile file) {
         if (file.isEmpty()) {
             throw new ApiException(1, "文件不能为空");
         }
         String fileName = file.getOriginalFilename();
-        if(!fileName.toLowerCase().endsWith(".png")&& !fileName.toLowerCase().endsWith("jpg")){
+        if (!fileName.toLowerCase().endsWith(".png") && !fileName.toLowerCase().endsWith("jpg")) {
             throw new ApiException(1, "只支持png和jpg格式文件");
         }
         long size = file.getSize();
-        if(size>1024*1024){
+        if (size > 1024 * 1024) {
             throw new ApiException(1, "头像大小不能超过1M");
-        }
-        else {
+        } else {
             try {
                 File base = new File("D:\\server\\header");
-                String filepath = new File(base, fileName).getAbsolutePath();
+                fileName = username + fileName;
+                String filepath = new File(base, username + fileName).getAbsolutePath();
                 file.transferTo(new File(filepath));
-                return "/header/"+fileName;
+                userMapper.updateHeader(username, fileName);
+                return "/img/header/" + fileName;
             } catch (IOException e) {
                 e.printStackTrace();
                 throw new ApiException(1, "文件上传失败");

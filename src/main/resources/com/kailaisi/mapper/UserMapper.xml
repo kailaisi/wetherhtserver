@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.kailaisi.mapper.UserMapper" >
-  <cache type="org.mybatis.caches.redis.RedisCache" />
-  <resultMap id="BaseResultMap" type="com.kailaisi.pojo.User" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="phone" property="phone" jdbcType="CHAR" />
-    <result column="username" property="username" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="age" property="age" jdbcType="INTEGER" />
-    <result column="sex" property="sex" jdbcType="INTEGER" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.kailaisi.mapper.UserMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.kailaisi.pojo.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="CHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="head" property="head" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, phone, username, password, age, sex, address
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_user
-    where id = #{id,jdbcType=INTEGER}
-  </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
 
-  <select id="findByNameAndPwd" resultType="com.kailaisi.pojo.User">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM t_user
-    WHERE username=#{username} AND password=#{pwd}
-  </select>
+    <select id="findByNameAndPwd" resultType="com.kailaisi.pojo.User">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        WHERE username=#{username} AND password=#{pwd}
+    </select>
 
-  <select id="getUserByPhoneAndName" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM t_user
-    WHERE phone=#{phone} or username=#{username}
-  </select>
+    <select id="getUserByPhoneAndName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        WHERE phone=#{phone} or username=#{username}
+    </select>
 
-  <select id="findAll" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List"/>
-    FROM t_user
-  </select>
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+    </select>
 
-  <insert id="register" parameterType="com.kailaisi.pojo.User" keyProperty="id" useGeneratedKeys="true">
+    <insert id="register" parameterType="com.kailaisi.pojo.User" keyProperty="id" useGeneratedKeys="true">
     insert into t_user(phone,username,password,age,sex,address)
     values (#{phone},#{username},#{password},#{age},#{sex},#{address})
   </insert>
+
+    <update id="updateHeader">
+    UPDATE t_user set head=#{head}
+    WHERE username=#{username}
+  </update>
 </mapper>

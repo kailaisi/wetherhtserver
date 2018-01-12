@@ -36,7 +36,7 @@ public class UserAction extends GlableExceptionHandler {
 
     @ResponseBody
     @RequestMapping(value = "/upload.do",method = RequestMethod.POST)
-    public String uploadHeadImg(@RequestParam("file") MultipartFile file) {
-        return userService.uploadHead(file);
+    public String uploadHeadImg(@RequestParam String username,@RequestParam("file") MultipartFile file) {
+        return userService.uploadHead(username,file);
     }
 }

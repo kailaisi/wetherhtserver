@@ -29,7 +29,8 @@ public interface UserService {
      * 上传头像
      *
      * @return
+     * @param username
      * @param file
      */
-    String uploadHead(MultipartFile file);
+    String uploadHead(String username, MultipartFile file);
 }

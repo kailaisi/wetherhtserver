@@ -2,7 +2,7 @@ package com.kailaisi.pojo;
 
 import com.kailaisi.bean.BaseBean;
 
-public class User extends BaseBean{
+public class User extends BaseBean {
 
     private Integer id;
 
@@ -19,6 +19,7 @@ public class User extends BaseBean{
     private String address;
 
     private String token;
+    private String head;
 
     public Integer getId() {
         return id;
@@ -84,6 +85,14 @@ public class User extends BaseBean{
         this.token = token;
     }
 
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -94,6 +103,8 @@ public class User extends BaseBean{
                 ", age=" + age +
                 ", sex=" + sex +
                 ", address='" + address + '\'' +
+                ", token='" + token + '\'' +
+                ", head='" + head + '\'' +
                 '}';
     }
 }
